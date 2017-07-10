@@ -1,3 +1,8 @@
+
+
+
+/////////////////////////////// FUNCTIONS //////////////////////////////
+
 function fetchData(search) {
 
 	var url = "https://en.wikipedia.org/w/api.php?format=json&action=query&origin=*&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch="+search;
@@ -25,8 +30,11 @@ function renderData(jsonData) {
 
 	// loops through property of the object.
 	// every property is a result
-	for(var property in objectData) {
+	// concatenates results in 'html' var
+	for(var property in objectData) { 
 
+
+		html += "<a target='_blank' href='https://en.wikipedia.org/?curid="+objectData[property].pageid+"'>";
 		html += "<div class='col-md-12'>";
 		html += "<div class='panel panel-primary'>";
 		html += "<div class='panel-heading'>";
@@ -37,8 +45,11 @@ function renderData(jsonData) {
 		html += "</div>";
 		html += "</div>";
 		html += "</div>";
+		html += "</a>";
 
-	}
+	}	
+
+	console.log(html);
 
 	// sets the html content of row
 	var row = document.querySelector('#results');
@@ -46,11 +57,18 @@ function renderData(jsonData) {
 
 }
 
-
 // selects the SEARCH BUTTON
 var searchButton = document.querySelector('#search-btn');
 var input = document.querySelector('#search-input');
 
+
+
+
+
+
+
+
+/////////////////////// EVENT LISTENERS ////////////////////////////
 
 // listens for a click on SEARCH BUTTON
 searchButton.addEventListener('click', function() {
